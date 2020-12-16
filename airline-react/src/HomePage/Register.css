@@ -1,0 +1,58 @@
+.PageHeading{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: black !important;
+    margin-bottom: 100px;
+}
+
+.about{
+    margin: 20px;
+    font-weight: 500;
+    text-align: justify;
+    font-size: medium;
+}
+
+.container1{
+    margin-left: 170px;
+    margin-right: 170px;
+    margin-bottom: 120px;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.img4{
+    height: 200px;
+    width: 300px;
+}
+
+.update{
+    width: 70%;
+    margin-top: 30px;
+    margin-left: 200px;
+}
+
+.city{
+    width: 525px;
+    height: 35px;
+    border: rgb(193, 193, 207) 1px solid;
+    color: rgb(126, 119, 119);
+    padding-left: 8px;
+    
+}
+.day{
+    width: 420px;
+    height: 35px;
+    border: rgb(193, 193, 207) 1px solid;
+    color: rgb(126, 119, 119);
+    padding-left: 8px;
+    
+}
+
+.addflt{
+    width: 70%;
+    margin-left: 300px;
+}
+
+.bookt{
+    margin-left: 200px;
+}

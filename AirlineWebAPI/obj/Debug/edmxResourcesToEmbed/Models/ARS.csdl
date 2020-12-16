@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AirlineModel4" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdminLogin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingSchedule">
+    <Key>
+      <PropertyRef Name="TicketID" />
+    </Key>
+    <Property Name="TicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Source" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserRegister" Relationship="Self.FK_BookingSchedule_UserRegister" FromRole="BookingSchedule" ToRole="UserRegister" />
+  </EntityType>
+  <EntityType Name="FlightSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SourceCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DestinationCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TakeOffTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="ArrivalTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="FlightDay" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TotalSeats" Type="Int32" Nullable="false" />
+    <Property Name="SeatsBooked" Type="Int32" />
+    <Property Name="AvailableSeats" Type="Int32" />
+  </EntityType>
+  <EntityType Name="UserQuery">
+    <Key>
+      <PropertyRef Name="SlNo" />
+    </Key>
+    <Property Name="SlNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNo" Type="Int64" Nullable="false" />
+    <Property Name="Msg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OtherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CountryOfResidence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNo" Type="Int64" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BookingSchedules" Relationship="Self.FK_BookingSchedule_UserRegister" FromRole="UserRegister" ToRole="BookingSchedule" />
+  </EntityType>
+  <Association Name="FK_BookingSchedule_UserRegister">
+    <End Role="UserRegister" Type="Self.UserRegister" Multiplicity="1" />
+    <End Role="BookingSchedule" Type="Self.BookingSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRegister">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BookingSchedule">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AirlineEntities9" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminLogins" EntityType="Self.AdminLogin" />
+    <EntitySet Name="BookingSchedules" EntityType="Self.BookingSchedule" />
+    <EntitySet Name="FlightSchedules" EntityType="Self.FlightSchedule" />
+    <EntitySet Name="UserQueries" EntityType="Self.UserQuery" />
+    <EntitySet Name="UserRegisters" EntityType="Self.UserRegister" />
+    <AssociationSet Name="FK_BookingSchedule_UserRegister" Association="Self.FK_BookingSchedule_UserRegister">
+      <End Role="UserRegister" EntitySet="UserRegisters" />
+      <End Role="BookingSchedule" EntitySet="BookingSchedules" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

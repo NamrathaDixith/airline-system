@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AirlineModel4.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminLogin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingSchedule">
+    <Key>
+      <PropertyRef Name="TicketID" />
+    </Key>
+    <Property Name="TicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="BookingDate" Type="date" Nullable="false" />
+    <Property Name="Source" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Destination" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FlightSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SourceCity" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DestinationCity" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TakeOffTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="ArrivalTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="FlightDay" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TotalSeats" Type="int" Nullable="false" />
+    <Property Name="SeatsBooked" Type="int" />
+    <Property Name="AvailableSeats" Type="int" />
+  </EntityType>
+  <EntityType Name="UserQuery">
+    <Key>
+      <PropertyRef Name="SlNo" />
+    </Key>
+    <Property Name="SlNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNo" Type="bigint" Nullable="false" />
+    <Property Name="Msg" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OtherName" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="CountryOfResidence" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nationality" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNo" Type="bigint" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BookingSchedule_UserRegister">
+    <End Role="UserRegister" Type="Self.UserRegister" Multiplicity="1" />
+    <End Role="BookingSchedule" Type="Self.BookingSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRegister">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BookingSchedule">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AirlineModel4StoreContainer">
+    <EntitySet Name="AdminLogin" EntityType="Self.AdminLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingSchedule" EntityType="Self.BookingSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlightSchedule" EntityType="Self.FlightSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserQuery" EntityType="Self.UserQuery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BookingSchedule_UserRegister" Association="Self.FK_BookingSchedule_UserRegister">
+      <End Role="UserRegister" EntitySet="UserRegister" />
+      <End Role="BookingSchedule" EntitySet="BookingSchedule" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

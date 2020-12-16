@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AirlineModel3.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Airline.dbo.UserQuery' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UserQuery">
+    <Key>
+      <PropertyRef Name="SlNo" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="PhoneNo" />
+      <PropertyRef Name="Message" />
+    </Key>
+    <Property Name="SlNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNo" Type="bigint" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="AirlineModel3StoreContainer">
+    <EntitySet Name="UserQuery" EntityType="Self.UserQuery" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UserQuery].[SlNo] AS [SlNo], 
+    [UserQuery].[Name] AS [Name], 
+    [UserQuery].[Email] AS [Email], 
+    [UserQuery].[PhoneNo] AS [PhoneNo], 
+    [UserQuery].[Message] AS [Message]
+    FROM [dbo].[UserQuery] AS [UserQuery]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

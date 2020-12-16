@@ -1,0 +1,25 @@
+.img1{
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+.homedes{
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+.heading3{
+    margin-left: 70px;
+    color: rgb(7, 7, 44);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 800;
+}
+
+.img2{
+    height: 200px;
+    width: 500px;
+}
+
+h5{
+    font-style: italic;
+}
